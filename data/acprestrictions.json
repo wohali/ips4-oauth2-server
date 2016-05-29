@@ -1,0 +1,7 @@
+{
+    "oauthserver": {
+        "clients": {
+            "clients_manage": "clients_manage"
+        }
+    }
+}

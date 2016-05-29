@@ -1,0 +1,8 @@
+{
+    "application_title": "OAuth2 Server",
+    "app_author": "Joan Touzet",
+    "app_directory": "oauth2server",
+    "app_protected": 0,
+    "app_website": "https:\/\/atypical.net\/",
+    "app_update_check": "https:\/\/atypical.net\/ips4\/oauth2-server.php"
+}

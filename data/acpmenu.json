@@ -1,0 +1,10 @@
+{
+    "oauthserver": {
+        "clients": {
+            "tab": "community",
+            "controller": "clients",
+            "do": "",
+            "restriction": "clients_manage"
+        }
+    }
+}

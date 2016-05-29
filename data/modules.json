@@ -1,0 +1,8 @@
+{
+    "admin": {
+        "oauthserver": {
+            "default_controller": "clients",
+            "protected": 0
+        }
+    }
+}
