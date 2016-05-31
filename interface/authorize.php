@@ -70,6 +70,7 @@ if ( empty($_POST) ) {
 // print the authorization code if the user has authorized your client
 $is_authorized = ( $_POST['authorized'] === "Yes" );
 if ( $is_authorized ) {
+    \IPS\Session::i()->csrfCheck();
     $storage->setAuthorization( \IPS\Request::i()->client_id, $member_id, '');
 }
 $server->handleAuthorizeRequest( $request, $response, $is_authorized, $member_id );

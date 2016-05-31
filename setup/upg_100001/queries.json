@@ -1,0 +1,53 @@
+{
+    "1": {
+        "method": "changeColumn",
+        "params": [
+            "oauth2server_clients",
+            "member_id",
+            {
+                "name": "member_id",
+                "type": "MEDIUMINT",
+                "length": 8,
+                "decimals": null,
+                "values": [],
+                "allow_null": false,
+                "default": "0",
+                "comment": "",
+                "unsigned": false,
+                "zerofill": false,
+                "auto_increment": false,
+                "binary": false
+            }
+        ]
+    },
+    "2": {
+        "method": "changeColumn",
+        "params": [
+            "oauth2server_access_tokens",
+            "member_id",
+            {
+                "name": "member_id",
+                "type": "MEDIUMINT",
+                "length": 8,
+                "decimals": null,
+                "values": [],
+                "allow_null": false,
+                "default": "0",
+                "comment": "",
+                "unsigned": false,
+                "zerofill": false,
+                "auto_increment": false,
+                "binary": false
+            }
+        ]
+    },
+    "3": {
+        "method": "delete",
+        "params": [
+            "core_tasks",
+            [
+                "key=expire_tokens"
+            ]
+        ]
+    }
+}

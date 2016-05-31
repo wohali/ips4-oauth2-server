@@ -87,18 +87,18 @@
                 "zerofill": false
             },
             "member_id": {
-                "allow_null": false,
-                "auto_increment": false,
-                "binary": false,
-                "comment": "",
-                "decimals": null,
-                "default": "",
-                "length": 8,
                 "name": "member_id",
                 "type": "MEDIUMINT",
-                "unsigned": false,
+                "length": 8,
+                "decimals": null,
                 "values": [],
-                "zerofill": false
+                "allow_null": false,
+                "default": "0",
+                "comment": "",
+                "unsigned": false,
+                "zerofill": false,
+                "auto_increment": false,
+                "binary": false
             },
             "node_id": {
                 "name": "node_id",
@@ -172,18 +172,18 @@
                 "zerofill": false
             },
             "member_id": {
-                "allow_null": false,
-                "auto_increment": false,
-                "binary": false,
-                "comment": "",
-                "decimals": null,
-                "default": "",
-                "length": 8,
                 "name": "member_id",
                 "type": "MEDIUMINT",
-                "unsigned": false,
+                "length": 8,
+                "decimals": null,
                 "values": [],
-                "zerofill": false
+                "allow_null": false,
+                "default": "0",
+                "comment": "",
+                "unsigned": false,
+                "zerofill": false,
+                "auto_increment": false,
+                "binary": false
             },
             "expires": {
                 "name": "expires",

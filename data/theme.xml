@@ -4,6 +4,7 @@
 <form method="post">
     <input type="submit" class="input_submit" name="authorized" value="Yes" />
     <input type="submit" class="input_submit ipsButton_secondary" name="authorized" value="No" />
+    <input type="hidden" name="csrfKey" value="{expression="\IPS\Session::i()->csrfKey"}" />
 </form>
 ]]></template>
 </theme>
