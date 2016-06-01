@@ -1,8 +1,8 @@
 # OAuth2 Server for IPS4
 
-This adds an OAuth2 server to your [IPS Community Suite 4](http://invisionpower.com/). This allows external applications to authenticate and authorize against your IPS4 membership. 
+This adds an OAuth2 server to your [IPS Community Suite 4](http://invisionpower.com/). This allows external applications to authenticate and authorize against your IPS4 membership.
 
-Administrators looking to integrate external applications with their IPS4 site via OAuth2 will need to register those applications with the IPS4 Admin Control Panel (ACP). 
+Administrators looking to integrate external applications with their IPS4 site via OAuth2 will need to register those applications with the IPS4 Admin Control Panel (ACP).
 
 ## Installation
 1. Download the latest version of OAuth2 Server for IPS4 from the [Invision Power Marketplace](https://invisionpower.com/files/).
@@ -15,7 +15,7 @@ Administrators looking to integrate external applications with their IPS4 site v
 2. Click the *Add Application* button.
 3. Enter your application's name and its Redirect URI. The Redirect URI is typically found in your application's OAuth settings or documentation.
 4. Click *Save*.
-5. Select the user groups you wish to be able to authenticate and authorize 
+5. Select the user groups you wish to be able to authenticate and authorize
 6. At the list of Applications, click on the Edit pencil.
 7. Take note of the application's Client ID, Client Secret, and Authorization, Access Token, and Profile URLs. Your application will need all of these values to complete its OAuth configuration.
 
@@ -93,6 +93,7 @@ GET https://ipboard/applications/oauth2server/interface/me.php?...
 Name | Type | Description
 -----|------|---------------
 `access_token`|`string`| **Required**. The access token provided in Step 3 above.
+`scope`|`string` | Scopes let you specify exactly what type of access you need.
 
 Note that you can also pass the token in the HTTP Authorization header, e.g.:
 
@@ -104,6 +105,11 @@ For example, this can be done in curl as follows:
 
 ```
 curl -H "Authorization: Bearer <access_token>" https://ipboard/applications/oauth2server/interface/me.php
+```
+
+Example with using scopes:
+
+```
 ```
 
 ### Response
