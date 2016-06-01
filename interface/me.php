@@ -25,18 +25,20 @@ if (!$server->verifyResourceRequest($request)) {
 }
 
 $token = $server->getAccessTokenData($request);
+$scope = \IPS\Request::i()->scope ? explode( '+', \IPS\Request::i()->scope) : ['user'];
 header('Content-Type: application/json');
 
 // create profile object
 if ( $member = \IPS\Member::load( $token['member_id'] ) ) {
-    $profile = array (
-        'id' => $member->member_id,
-        'username' => $member->name,
-        'displayName' => $member->name,
-        'email' => $member->email,
-        'profileUrl' => strval($member->url()),
-        'avatar' => $member->get_photo()
-    );
+    $profile = [];
+    $profile['id'] = $member->member_id;
+    $profile['username'] = $member->name;
+    $profile['displayName'] = $member->name;
+    if( in_array('email', $scope, true) )
+        $profile['email'] = $member->email;
+    $profile['profileUrl'] = strval($member->url());
+    $profile['avatar'] = $member->get_photo();
+
     echo json_encode($profile);
 } else {
     http_response_code(404);
