@@ -110,6 +110,7 @@ curl -H "Authorization: Bearer <access_token>" https://ipboard/applications/oaut
 Example with using scopes:
 
 ```
+https://ipboard/applications/oauth2server/interface/me.php?access_token=...&scope=user+email
 ```
 
 ### Response

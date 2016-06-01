@@ -25,6 +25,7 @@ if (!$server->verifyResourceRequest($request)) {
 }
 
 $token = $server->getAccessTokenData($request);
+$scope = \IPS\Request::i()->scope ? explode( '+', \IPS\Request::i()->scope) : ['user'];
 header('Content-Type: application/json');
 
 // create profile object
