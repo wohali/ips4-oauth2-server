@@ -13,11 +13,11 @@ Administrators looking to integrate external applications with their IPS4 site v
 ## Application configuration
 1. Visit the settings panel under ACP > Community > OAuth2 Server > Applications.
 2. Click the *Add Application* button.
-3. Enter your application's name and its Redirect URI. The Redirect URI is typically found in your application's OAuth settings or documentation.
+3. Enter your application's name and its Redirect URI. The Redirect URI is typically found in your application's OAuth settings or documentation. Be sure to match whether it is SSL-enabled or not (http:// vs. https://).
 4. Click *Save*.
 5. Select the user groups you wish to be able to authenticate and authorize 
 6. At the list of Applications, click on the Edit pencil.
-7. Take note of the application's Client ID, Client Secret, and Authorization, Access Token, and Profile URLs. Your application will need all of these values to complete its OAuth configuration.
+7. Take note of the application's Client ID, Client Secret, and Authorization, Access Token, and Profile URLs. Your application will need all of these values to complete its OAuth configuration. Be sure to match whether your IPS4 installation is SSL-enabled or not (http:// vs. https://).
 
 ## Tested applications
 
@@ -34,7 +34,7 @@ OAuth2 integration is a 4 step process.
 
 ### Request
 ```
-GET https://ipboard/applications/oauth2server/interface/authorize.php?...
+GET http(s)://ipboard/applications/oauth2server/interface/authorize.php?...
 ```
 
 ### Parameters
@@ -58,7 +58,7 @@ Assuming the user picks Yes in the authorization form (or has previously done so
 
 ### Request
 ```
-POST https://ipboard/applications/oauth2server/interface/token.php
+POST http(s)://ipboard/applications/oauth2server/interface/token.php
 ```
 
 ### Parameters
@@ -86,7 +86,7 @@ Name | Type | Description
 
 ### Request
 ```
-GET https://ipboard/applications/oauth2server/interface/me.php?...
+GET http(s)://ipboard/applications/oauth2server/interface/me.php?...
 ```
 
 ### Parameters
