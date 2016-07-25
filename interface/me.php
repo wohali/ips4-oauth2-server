@@ -35,7 +35,9 @@ if ( $member = \IPS\Member::load( $token['member_id'] ) ) {
         'displayName' => $member->name,
         'email' => $member->email,
         'profileUrl' => strval($member->url()),
-        'avatar' => $member->get_photo()
+        'avatar' => $member->get_photo(),
+        'group' => $member->member_group_id,
+        'group_others' => explode(',', $member->mgroup_others)
     );
     echo json_encode($profile);
 } else {
