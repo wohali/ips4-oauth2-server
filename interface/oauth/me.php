@@ -4,16 +4,13 @@
  * @author              Joan Touzet
  * @copyright           (c) 2016 Joan Touzet
  * @license             GPL 2
- *
- * NOTE: Files in this directory only exist for compatibility with versions prior to IPS 4.1.14.
- * See the oauth/ subdirectory for compatibility at IPS 4.1.14 and newer.
  */
 
-require_once str_replace( 'applications/oauth2server/interface/me.php', '', str_replace( '\\', '/', __FILE__ ) ) . 'init.php';
-\IPS\Dispatcher\Front::i();
+require_once str_replace( 'applications/oauth2server/interface/oauth/me.php', '', str_replace( '\\', '/', __FILE__ ) ) . 'init.php';
+\IPS\Dispatcher\External::i();
 
-require_once str_replace( 'interface/me.php', 'sources/Server/Storage.php', str_replace( '\\', '/', __FILE__ ) );
-require_once str_replace( 'interface/me.php', 'sources/Server/Server.php', str_replace( '\\', '/', __FILE__ ) );
+require_once str_replace( 'interface/oauth/me.php', 'sources/Server/Storage.php', str_replace( '\\', '/', __FILE__ ) );
+require_once str_replace( 'interface/oauth/me.php', 'sources/Server/Server.php', str_replace( '\\', '/', __FILE__ ) );
 
 // setup storage and new server
 $storage = new \IPS\oauth2server\Storage( \IPS\Db::i() );
@@ -38,9 +35,7 @@ if ( $member = \IPS\Member::load( $token['member_id'] ) ) {
         'displayName' => $member->name,
         'email' => $member->email,
         'profileUrl' => strval($member->url()),
-        'avatar' => $member->get_photo(),
-        'group' => $member->member_group_id,
-        'group_others' => explode(',', $member->mgroup_others)
+        'avatar' => $member->get_photo()
     );
     echo json_encode($profile);
 } else {

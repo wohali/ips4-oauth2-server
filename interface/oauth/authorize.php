@@ -4,22 +4,20 @@
  * @author              Joan Touzet
  * @copyright           (c) 2016 Joan Touzet
  * @license             GPL 2
- *
- * NOTE: Files in this directory only exist for compatibility with versions prior to IPS 4.1.14.
- * See the oauth/ subdirectory for compatibility at IPS 4.1.14 and newer.
  */
 
-require_once str_replace( 'applications/oauth2server/interface/authorize.php', '', str_replace( '\\', '/', __FILE__ ) ) . 'init.php';
-\IPS\Dispatcher\Front::i();
 
-require_once str_replace( 'interface/authorize.php', 'sources/Server/Storage.php', str_replace( '\\', '/', __FILE__ ) );
-require_once str_replace( 'interface/authorize.php', 'sources/Server/Server.php', str_replace( '\\', '/', __FILE__ ) );
+require_once str_replace( 'applications/oauth2server/interface/oauth/authorize.php', '', str_replace( '\\', '/', __FILE__ ) ) . 'init.php';
+\IPS\Dispatcher\External::i();
+
+require_once str_replace( 'interface/oauth/authorize.php', 'sources/Server/Storage.php', str_replace( '\\', '/', __FILE__ ) );
+require_once str_replace( 'interface/oauth/authorize.php', 'sources/Server/Server.php', str_replace( '\\', '/', __FILE__ ) );
 
 // require login
 $member_id = \IPS\Member::loggedIn()->member_id;
 if ( ! $member_id ) {
     // ref parameter is base64 encoding of destination URL
-    $ref_url = \IPS\Settings::i()->base_url . "applications/oauth2server/interface/authorize.php?" . http_build_query($_GET);
+    $ref_url = \IPS\Settings::i()->base_url . "applications/oauth2server/interface/oauth/authorize.php?" . http_build_query($_GET);
     $ref = base64_encode( $ref_url );
     \IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=core&module=system&controller=login&ref=' . $ref, 'front', 'login' ) );
 }

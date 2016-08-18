@@ -4,6 +4,9 @@
  * @author              Joan Touzet
  * @copyright           (c) 2016 Joan Touzet
  * @license             GPL 2
+ *
+ * NOTE: Files in this directory only exist for compatibility with versions prior to IPS 4.1.14.
+ * See the oauth/ subdirectory for compatibility at IPS 4.1.14 and newer.
  */
 
 require_once str_replace( 'applications/oauth2server/interface/token.php', '', str_replace( '\\', '/', __FILE__ ) ) . 'init.php';
