@@ -2,7 +2,7 @@
 
 It's simple to configure Rocket.Chat to use your IPS OAuth2 server, creating a single-sign-on solution for your Rocket.Chat instance. Here's how.
 
-## Configure Rocket.chat (Pass 1)
+## Configure Rocket.Chat (Pass 1)
 
 1. Install and setup Rocket.Chat. A walkthrough is beyond the scope of this guide.
 2. Create an initial administrator user and password, then login as that administrator.
@@ -21,17 +21,17 @@ It's simple to configure Rocket.Chat to use your IPS OAuth2 server, creating a s
 
 ## Configure Rocket.Chat (Pass 2)
 1. Change the following settings:
-*  **Enabled**: True
-*   **URL**: Top-level URL for your IPS4 site, such as `https://your.ips4.com/`. If your site is not installed at the root of the webserver, include any subdirectory here, such as `https://mysite.com/ips4`.
-*   **Token Path**: `applications/oauth2server/interface/oauth/token.php`
-*   **Identity Path**: `applications/oauth2server/interface/oauth/me.php`
-*   **Authorization Path**: `applications/oauth2server/interface/oauth/authorize.php`
-*   **Token sent via**: Payload or Header both work, it doesn't matter.
-*   **ID**: your Client ID from IPS4 here
-*   **Secret**: your Client Secret from IPS4 here
-*   **Scope**: `user.email user.profile`
-*   **Login Style**: I recommend Popup
-*   **Button** settings as you wish.
+  *  **Enabled**: True
+  *   **URL**: Top-level URL for your IPS4 site, such as `https://your.ips4.com/`. If your site is not installed at the root of the webserver, include any subdirectory here, such as `https://mysite.com/ips4`.
+  *   **Token Path**: `applications/oauth2server/interface/oauth/token.php`
+  *   **Identity Path**: `applications/oauth2server/interface/oauth/me.php`
+  *   **Authorization Path**: `applications/oauth2server/interface/oauth/authorize.php`
+  *   **Token sent via**: Payload or Header both work, it doesn't matter.
+  *   **ID**: your Client ID from IPS4 here
+  *   **Secret**: your Client Secret from IPS4 here
+  *   **Scope**: `user.email user.profile`
+  *   **Login Style**: I recommend Popup
+  *   **Button** settings as you wish.
 2. You may have to restart the Rocket.Chat server at this point. I had to, but I cannot guarantee that is is mandatory.
 3. Logout as Administrator and use the new button to log in as an IPS4 user. If this works _your installation is working, congratulations!_
 4. Log back in as the Administrator user and give admin access to your IPS4 user (`#general` chat > people icon on the right > click on user > MAKE ADMIN).
