@@ -63,8 +63,23 @@ if ($storage->hasAuthorization( \IPS\Request::i()->client_id, $member_id, '' ) )
 // display an authorization form
 if ( empty($_POST) ) {
     $client = $storage->getClientDetails( \IPS\Request::i()->client_id );
+    // check scope for containment
+    if ( \IPS\Request::i()->scope ) { 
+        $scope_req = explode( ' ', \IPS\Request::i()->scope );
+        $scope_cli = explode( ' ', $client['scope'] );
+        if ( count( array_intersect( $scope_req, $scope_cli ) ) != count( $scope_req ) ) {
+            // scope requested not authorized by IPS ACP-entered client definition
+            \IPS\Output::i()->sendOutput( 'ERROR: Requested scope "' . $scope_req . '" not allowed by ACP definition.', 403, 'text/html' );
+        }
+        $scope = $scope_req;
+    } else {
+        $scope = explode( ' ', $client['scope'] );
+    }
+
+    // scope is contained, request permission from user
     $header = \IPS\Theme::i()->getTemplate( 'global', 'core', 'front' )->logo();
-    $form = \IPS\Theme::i()->getTemplate( 'server', 'oauth2server', 'front' )->authorize( $client );
+    // TODO: Surface scope in template output
+    $form = \IPS\Theme::i()->getTemplate( 'server', 'oauth2server', 'front' )->authorize( $client, $scope );
     \IPS\Output::i()->sendOutput( $header . $form, 200, 'text/html', \IPS\Output::i()->httpHeaders );
 }
 
@@ -72,7 +87,7 @@ if ( empty($_POST) ) {
 $is_authorized = ( $_POST['authorized'] === "Yes" );
 if ( $is_authorized ) {
     \IPS\Session::i()->csrfCheck();
-    $storage->setAuthorization( \IPS\Request::i()->client_id, $member_id, '');
+    $storage->setAuthorization( \IPS\Request::i()->client_id, $member_id, \IPS\Request::i()->scope );
 }
 $server->handleAuthorizeRequest( $request, $response, $is_authorized, $member_id );
 $response->send();

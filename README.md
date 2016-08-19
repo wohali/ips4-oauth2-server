@@ -34,7 +34,7 @@ OAuth2 integration is a 4 step process.
 
 ### Request
 ```
-GET http(s)://ipboard/applications/oauth2server/interface/authorize.php?...
+GET http(s)://ipboard/applications/oauth2server/interface/oauth/authorize.php?...
 ```
 
 ### Parameters
@@ -45,6 +45,7 @@ Name | Type | Description
 `redirect_uri`|`string` | **Required**. The URL in your app where users will be sent after authorization.
 `state`|`string` | **Required**. An unguessable random string. It is used to protect against cross-site request forgery attacks.
 `response_type`|`string`| **Required**. Value is typically `code`.
+`scope`|`string`| Optional. Value is a space (`%2C`) delimited list of requested scopes. Currently supported scopes: `user.profile`, `user.email`, `user.groups`.
 
 ### Response
 
@@ -58,7 +59,7 @@ Assuming the user picks Yes in the authorization form (or has previously done so
 
 ### Request
 ```
-POST http(s)://ipboard/applications/oauth2server/interface/token.php
+POST http(s)://ipboard/applications/oauth2server/interface/oauth/token.php
 ```
 
 ### Parameters
@@ -77,7 +78,7 @@ Name | Type | Description
   "access_token": "abcdefabcdefabcdefabcdefabcdefabcdefabc",
   "expires_in": 3600,
   "token_type": "Bearer",
-  "scope": null,
+  "scope": "user.profile user.email",
   "refresh_token": "123456123456123456123456123456123456123"
 }
 ```
@@ -86,7 +87,7 @@ Name | Type | Description
 
 ### Request
 ```
-GET http(s)://ipboard/applications/oauth2server/interface/me.php?...
+GET http(s)://ipboard/applications/oauth2server/interface/oauth/me.php?...
 ```
 
 ### Parameters
@@ -103,7 +104,7 @@ Authorization: Bearer <access_token>
 For example, this can be done in curl as follows:
 
 ```
-curl -H "Authorization: Bearer <access_token>" https://ipboard/applications/oauth2server/interface/me.php
+curl -H "Authorization: Bearer <access_token>" https://ipboard/applications/oauth2server/interface/oauth/me.php
 ```
 
 ### Response

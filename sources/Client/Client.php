@@ -175,10 +175,14 @@ class _Client extends \IPS\Node\Model implements \IPS\Node\Permissions
         $form->add( new \IPS\Helpers\Form\Text( 'client_name', $this->client_id ? $this->client_name : '', TRUE, array( 'maxLength' => 255 ) ) );
         $form->add( new \IPS\Helpers\Form\Text( 'redirect_uri', $this->client_id ? $this->redirect_uri : '', TRUE, array( 'maxLength' => 2000 ) ) );
 
+        $form->add( new \IPS\Helpers\Form\CheckboxSet( 'scope', $this->client_id ? explode( ' ', $this->scope) : array( 'user.profile' ), TRUE, array(
+            'options' => array( 'user.profile' => 'scope_user.profile', 'user.email' => 'scope_user.email', 'user.groups' => 'scope_user.groups' ),
+        ) ) );
+
         $form->hiddenValues['client_id'] = $this->_id ? $this->client_id : mb_substr(md5(openssl_random_pseudo_bytes(20, $strong)), 0, 20);
         $form->hiddenValues['client_secret'] = $this->_id ? $this->client_secret : mb_substr(md5(openssl_random_pseudo_bytes(40, $strong)), 0, 40);
         $form->hiddenValues['member_id'] = \IPS\Member::loggedIn()->member_id;
-        $form->hiddenValues['scope'] = 'user.email user.profile';
+        // $form->hiddenValues['scope'] = 'user.email user.profile';
         $form->hiddenValues['grant_types'] = 'authorization_code implicit';
 
         if ( $this->_id ) {
@@ -201,6 +205,12 @@ class _Client extends \IPS\Node\Model implements \IPS\Node\Permissions
             $form->addSeparator();
             $form->addHtml("</dl>");
         }
+    }
+
+    public function saveForm( $values )
+    {
+        $values[ 'scope' ] = implode ( ' ', $values[ 'scope' ] );
+        parent::saveForm( $values );
     }
 
 }

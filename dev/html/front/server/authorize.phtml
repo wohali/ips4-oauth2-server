@@ -1,5 +1,11 @@
-<ips:template parameters="$client" />
-<p>Do you authorize the application {$client['client_name']} to login using your credentials?</p>
+<ips:template parameters="$client, $scope" />
+<p>Do you authorize the application {$client['client_name']} to access this site?</p>
+<p>The following access permissions will be granted to the application:</p>
+<ul>
+{{foreach $scope as $foo => $perm}}
+  <li>{lang="scope_{$perm}"}</li>
+{{endforeach}}
+</ul>
 <form method="post">
     <input type="submit" class="input_submit" name="authorized" value="Yes" />
     <input type="submit" class="input_submit ipsButton_secondary" name="authorized" value="No" />

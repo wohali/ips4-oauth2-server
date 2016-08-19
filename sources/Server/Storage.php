@@ -16,9 +16,15 @@ use OAuth2\Storage\AccessTokenInterface;
 use OAuth2\Storage\ClientCredentialsInterface;
 use OAuth2\Storage\AuthorizationCodeInterface;
 use OAuth2\Storage\RefreshTokenInterface;
+use OAuth2\Storage\ScopeInterface;
 
-
-class Storage implements AccessTokenInterface, ClientCredentialsInterface, AuthorizationCodeInterface, RefreshTokenInterface {
+class Storage implements
+    AccessTokenInterface,
+    ClientCredentialsInterface,
+    AuthorizationCodeInterface,
+    RefreshTokenInterface,
+    ScopeInterface
+{
 
     /**
      * IPB's database interface
@@ -261,6 +267,7 @@ class Storage implements AccessTokenInterface, ClientCredentialsInterface, Autho
         return $ret;
     }
 
+    
     /**
      * Get the scope associated with this client
      *
@@ -402,5 +409,51 @@ class Storage implements AccessTokenInterface, ClientCredentialsInterface, Autho
         $member_id = intval( $user_id );
         $row = compact( 'client_id', 'member_id', 'created_at', 'scope' );
         $this->db->insert( 'oauth2server_members', $row );
+    }
+
+    /**
+     * Check if the provided scope exists.
+     *
+     * @param $scope
+     * A space-separated string of scopes.
+     *
+     * @return
+     * TRUE if it exists, FALSE otherwise.
+     */
+    public function scopeExists($scope)
+    {
+        return in_array($scope, array( "user.email", "user.profile", "user.groups" ));
+    }
+
+    /**
+     * The default scope to use in the event the client
+     * does not request one. By returning "false", a
+     * request_error is returned by the server to force a
+     * scope request by the client. By returning "null",
+     * opt out of requiring scopes
+     *
+     * @param $client_id
+     * An optional client id that can be used to return customized default scopes.
+     *
+     * @return
+     * string representation of default scope, null if
+     * scopes are not defined, or false to force scope
+     * request by the client
+     *
+     * ex:
+     *     'default'
+     * ex:
+     *     null
+     */
+    public function getDefaultScope($client_id = null)
+    {
+        try {
+            $client = $this->db->select( '*', 'oauth2server_clients', array( 'client_id=?', $client_id ) )->first();
+        }
+        catch ( \UnderflowException $e ) {
+            return FALSE;
+        }
+
+        return $client['scope'];
     }
 }

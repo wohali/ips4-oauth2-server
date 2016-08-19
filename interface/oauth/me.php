@@ -29,16 +29,37 @@ header('Content-Type: application/json');
 
 // create profile object
 if ( $member = \IPS\Member::load( $token['member_id'] ) ) {
-    $profile = array (
-        'id' => $member->member_id,
-        'username' => $member->name,
-        'displayName' => $member->name,
-        'email' => $member->email,
-        'profileUrl' => strval($member->url()),
-        'avatar' => $member->get_photo(),
-        'group' => $member->member_group_id,
-        'group_others' => explode(',', $member->mgroup_others)
-    );
+    $profile = array( );
+    if ( strlen( $token['scope'] == 0 ) ) {
+        // Compatibility for tokens created prior to v1.2.0 of this plugin
+        // Use the default scope from the client.
+        $client = $storage->getClientDetails( $token['client_id'] );
+        $scope = explode( ' ', $client['scope'] );
+    } else {
+        $scope = explode( ' ', $token['scope'] );
+    }
+
+    if ( in_array( 'user.profile', $scope ) ) {
+        $profile = array_merge ( $profile, array (
+            'id' => $member->member_id,
+            'username' => $member->name,
+            'displayName' => $member->name,
+            'profileUrl' => strval($member->url()),
+            'avatar' => $member->get_photo()
+        ) );
+    }
+    if ( in_array( 'user.email', $scope ) ) {
+        $profile = array_merge ( $profile, array (
+            'email' => $member->email
+        ) );
+    }
+    if ( in_array( 'user.groups', $scope ) ) {
+        $profile = array_merge ( $profile, array (
+            'group' => $member->member_group_id,
+            'group_others' => explode(',', $member->mgroup_others)
+        ) );
+    }
+
     echo json_encode($profile);
 } else {
     http_response_code(404);
