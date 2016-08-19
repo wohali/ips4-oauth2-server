@@ -59,6 +59,11 @@ if ( $member = \IPS\Member::load( $token['member_id'] ) ) {
             'group_others' => explode(',', $member->mgroup_others)
         ) );
     }
+    if ( in_array( 'user.reputation', $scope ) ) {
+        $profile = array_merge ( $profile, array (
+            'reputation' => $member->pp_reputation_points
+        ) );
+    }
 
     echo json_encode($profile);
 } else {
