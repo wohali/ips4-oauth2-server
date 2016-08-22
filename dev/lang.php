@@ -25,5 +25,8 @@ $lang = array(
     'profile_url' => "Profile URL",
     'perm_oauth2server_perm__label' => "Application Permissions",
     'perm_oauth2server_perm__access' => "Access Application",
-    'task__expiretokens' => "Expires obsolete access tokens, refresh tokens and authorization codes."
+    'task__expiretokens' => "Expires obsolete access tokens, refresh tokens and authorization codes.",
+    'perm_request_prefix' => "Do you authorize the application",
+    'perm_request_suffix' => "to access this site?",
+    'perm_list_prefix' => "The following access permissions will be granted to the application:"
 );

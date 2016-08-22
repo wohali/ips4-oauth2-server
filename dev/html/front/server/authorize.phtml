@@ -1,6 +1,6 @@
 <ips:template parameters="$client, $scope" />
-<p>Do you authorize the application {$client['client_name']} to access this site?</p>
-<p>The following access permissions will be granted to the application:</p>
+<p>{lang="perm_request_prefix"} {$client['client_name']} {lang="perm_request_suffix"}</p>
+<p>{lang="perm_list_prefix"}</p>
 <ul>
 {{foreach $scope as $foo => $perm}}
   <li>{lang="scope_{$perm}"}</li>
