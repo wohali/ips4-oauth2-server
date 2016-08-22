@@ -17,6 +17,7 @@ $lang = array(
     'scope_user.profile' => "User profile information",
     'scope_user.email' => "User email address",
     'scope_user.groups' => "User primary and secondary groups",
+    'scope_user.reputation' => "User reputation points",
     'client_id' => "Client ID",
     'client_secret' => "Client Secret",
     'authorization_url' => "Authorization URL",

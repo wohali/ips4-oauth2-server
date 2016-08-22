@@ -422,7 +422,7 @@ class Storage implements
      */
     public function scopeExists($scope)
     {
-        return in_array($scope, array( "user.email", "user.profile", "user.groups" ));
+        return in_array($scope, array( "user.email", "user.profile", "user.groups", "user.reputation" ));
     }
 
     /**

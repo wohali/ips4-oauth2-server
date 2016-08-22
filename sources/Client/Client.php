@@ -176,7 +176,7 @@ class _Client extends \IPS\Node\Model implements \IPS\Node\Permissions
         $form->add( new \IPS\Helpers\Form\Text( 'redirect_uri', $this->client_id ? $this->redirect_uri : '', TRUE, array( 'maxLength' => 2000 ) ) );
 
         $form->add( new \IPS\Helpers\Form\CheckboxSet( 'scope', $this->client_id ? explode( ' ', $this->scope) : array( 'user.profile' ), TRUE, array(
-            'options' => array( 'user.profile' => 'scope_user.profile', 'user.email' => 'scope_user.email', 'user.groups' => 'scope_user.groups' ),
+            'options' => array( 'user.profile' => 'scope_user.profile', 'user.email' => 'scope_user.email', 'user.groups' => 'scope_user.groups', 'user.reputation' => 'scope_user.reputation' ),
         ) ) );
 
         $form->hiddenValues['client_id'] = $this->_id ? $this->client_id : mb_substr(md5(openssl_random_pseudo_bytes(20, $strong)), 0, 20);

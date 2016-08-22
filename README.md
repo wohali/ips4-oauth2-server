@@ -45,7 +45,7 @@ Name | Type | Description
 `redirect_uri`|`string` | **Required**. The URL in your app where users will be sent after authorization.
 `state`|`string` | **Required**. An unguessable random string. It is used to protect against cross-site request forgery attacks.
 `response_type`|`string`| **Required**. Value is typically `code`.
-`scope`|`string`| Optional. Value is a space (`%2C`) delimited list of requested scopes. Currently supported scopes: `user.profile`, `user.email`, `user.groups`.
+`scope`|`string`| Optional. Value is a space (`%2C`) delimited list of requested scopes. Currently supported scopes: `user.profile`, `user.email`, `user.groups`, `user.reputation`.
 
 ### Response
 
