@@ -1,0 +1,11 @@
+{
+    "1": {
+        "method": "delete",
+        "params": [
+            "core_tasks",
+            [
+                "name": "expire_tokens"
+            ]
+        ]
+    }
+}

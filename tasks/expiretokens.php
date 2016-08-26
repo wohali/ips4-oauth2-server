@@ -6,7 +6,7 @@
  * @license		http://www.invisionpower.com/legal/standards/
  * @package		IPS Community Suite
  * @subpackage	oauth2server
- * @since		28 May 2016
+ * @since		26 Aug 2016
  * @version		SVN_VERSION_NUMBER
  */
 
@@ -37,10 +37,6 @@ class _expiretokens extends \IPS\Task
 	 */
 	public function execute()
 	{
-        $now = new \DateTime();
-        \IPS\Db::i()->delete( 'oauth2server_access_tokens', array ( 'expires < ?', $now->format('Y-m-d H:i:s') ));
-        \IPS\Db::i()->delete( 'oauth2server_refresh_tokens', array ( 'expires < ?', $now->format('Y-m-d H:i:s') ));
-        \IPS\Db::i()->delete( 'oauth2server_authorization_codes', array ( 'expires < ?', $now->format('Y-m-d H:i:s') ));
 		return NULL;
 	}
 	
