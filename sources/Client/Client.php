@@ -195,13 +195,13 @@ class _Client extends \IPS\Node\Model implements \IPS\Node\Permissions
             $form->addHtml( "<dd><p><tt>" . $form->hiddenValues['client_secret'] . "</tt></p></dd>" );
             $form->addSeparator();
             $form->addHtml( "<dt><b>" . \IPS\Member::loggedIn()->language()->addToStack( 'authorization_url' ) . "</b></dt>" );
-            $form->addHtml( "<dd><p><tt>" . \IPS\Settings::i()->base_url . "applications/oauth2server/interface/authorize.php</tt></p></dd>" );
+            $form->addHtml( "<dd><p><tt>" . \IPS\Settings::i()->base_url . "applications/oauth2server/interface/oauth/authorize.php</tt></p></dd>" );
             $form->addSeparator();
             $form->addHtml( "<dt><b>" . \IPS\Member::loggedIn()->language()->addToStack( 'access_token_url' ) . "</b></dt>" );
-            $form->addHtml( "<dd><p><tt>" . \IPS\Settings::i()->base_url . "applications/oauth2server/interface/token.php</tt></p></dd>" );
+            $form->addHtml( "<dd><p><tt>" . \IPS\Settings::i()->base_url . "applications/oauth2server/interface/oauth/token.php</tt></p></dd>" );
             $form->addSeparator();
             $form->addHtml( "<dt><b>" . \IPS\Member::loggedIn()->language()->addToStack( 'profile_url' ) . "</b></dt>" );
-            $form->addHtml( "<dd><p><tt>" . \IPS\Settings::i()->base_url . "applications/oauth2server/interface/me.php</tt></p></dd>");
+            $form->addHtml( "<dd><p><tt>" . \IPS\Settings::i()->base_url . "applications/oauth2server/interface/oauth/me.php</tt></p></dd>");
             $form->addSeparator();
             $form->addHtml("</dl>");
         }
