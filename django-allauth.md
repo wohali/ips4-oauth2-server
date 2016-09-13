@@ -134,7 +134,7 @@ UPDATE django_site SET domain = 'djangoapp.example.com', name = 'Site Name' WHER
 ```
 INSERT INTO socialaccount_socialapp (provider, name, secret, client_id, 'key')
        VALUES ("mysitename", "MySiteName", "---your Client Secret from IPS4---",
-               "---your Client Secret from IPS4---", "");
+               "---your Client ID from IPS4---", "");
 ```
 ```
 INSERT INTO socialaccount_socialapp_sites (socialapp_id, site_id)
@@ -151,5 +151,5 @@ At the moment Django Allauth has no **easy** way to disable the signup form and 
 1. For the sign up form, take a look at allauth doc here: http://django-allauth.readthedocs.io/en/latest/advanced.html#creating-and-populating-user-instances, in particular the function ```is_open_for_signup(self, request)```
 2. For the sign in form, you must invent something
 
-Here you can find the feature request for Allauth: https://github.com/pennersr/django-allauth/issues/345
+Here you can find the feature request for Allauth, just subscribe to get the last notifications: https://github.com/pennersr/django-allauth/issues/345
 
