@@ -58,7 +58,7 @@ class MySiteNameProvider(OAuth2Provider):
                     email=data.get('email'))
 
     def get_default_scope(self):
-        scope = ['user.profile', 'user.email'] # The scopes are already set, if this ips4-oauth2-server will add more, edit this line
+        scope = []
         return scope
 
 
@@ -72,7 +72,7 @@ from allauth.tests import MockedResponse, TestCase
 
 from .provider import MySiteNameProvider
 
-class TwitchTests(OAuth2TestsMixin, TestCase):
+class MySiteNameTests(OAuth2TestsMixin, TestCase):
     provider_id = MySiteNameProvider.id
 
     def get_mocked_response(self):
