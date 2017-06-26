@@ -32,6 +32,9 @@ class _clients extends \IPS\Node\Controller
     public function execute()
     {
         \IPS\Dispatcher::i()->checkAcpPermission( 'clients_manage' );
+        chmod( \IPS\ROOT_PATH . '/applications/oauth2server/interface/oauth/authorize.php', 0755 );
+        chmod( \IPS\ROOT_PATH . '/applications/oauth2server/interface/oauth/me.php', 0755 );
+        chmod( \IPS\ROOT_PATH . '/applications/oauth2server/interface/oauth/token.php', 0755 );
         parent::execute();
     }
 

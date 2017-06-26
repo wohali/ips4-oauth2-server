@@ -28,5 +28,8 @@ $lang = array(
     'task__expiretokens' => "Expires obsolete access tokens, refresh tokens and authorization codes.",
     'perm_request_prefix' => "Do you authorize the application",
     'perm_request_suffix' => "to access this site?",
-    'perm_list_prefix' => "The following access permissions will be granted to the application:"
+    'perm_list_prefix' => "The following access permissions will be granted to the application:",
+    'authorize_title' => "Authorize external application",
+    'authorize_yes' => "Yes",
+    'authorize_no' => "No",
 );

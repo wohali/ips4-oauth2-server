@@ -2,7 +2,7 @@
 /**
  * @brief               OAuth 2 Server Authorization Gateway
  * @author              Joan Touzet
- * @copyright           (c) 2016 Joan Touzet
+ * @copyright           (c) 2016-2017 Joan Touzet
  * @license             GPL 2
  */
 
@@ -17,7 +17,7 @@ require_once str_replace( 'interface/oauth/authorize.php', 'sources/Server/Serve
 $member_id = \IPS\Member::loggedIn()->member_id;
 if ( ! $member_id ) {
     // ref parameter is base64 encoding of destination URL
-    $ref_url = \IPS\Settings::i()->base_url . "applications/oauth2server/interface/oauth/authorize.php?" . http_build_query($_GET);
+    $ref_url = \IPS\Settings::i()->base_url . "applications/oauth2server/interface/oauth/authorize.php?" . http_build_query($_GET, null, ini_get('arg_separator.output'), PHP_QUERY_RFC3986);
     $ref = base64_encode( $ref_url );
     \IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=core&module=system&controller=login&ref=' . $ref, 'front', 'login' ) );
 }
@@ -76,11 +76,10 @@ if ( empty($_POST) ) {
         $scope = explode( ' ', $client['scope'] );
     }
 
-    // scope is contained, request permission from user
-    $header = \IPS\Theme::i()->getTemplate( 'global', 'core', 'front' )->logo();
     // TODO: Surface scope in template output
     $form = \IPS\Theme::i()->getTemplate( 'server', 'oauth2server', 'front' )->authorize( $client, $scope );
-    \IPS\Output::i()->sendOutput( $header . $form, 200, 'text/html', \IPS\Output::i()->httpHeaders );
+    $title = \IPS\Member::loggedIn()->language()->addToStack('authorize_title');
+    \IPS\Output::i()->sendOutput( \IPS\Theme::i()->getTemplate( 'global', 'core' )->globalTemplate( $title, $form, true, \IPS\ROOT_PATH ) , 200, 'text/html', \IPS\Output::i()->httpHeaders );
 }
 
 // print the authorization code if the user has authorized your client
