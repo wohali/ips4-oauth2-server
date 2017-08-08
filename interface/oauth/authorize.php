@@ -25,6 +25,11 @@ if ( ! $member_id ) {
     \IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=core&module=system&controller=login&ref=' . $ref, 'front', 'login' ) );
 }
 
+$member = \IPS\Member::loggedIn();
+if ( $member === NULL or $member->isBanned() or $member->members_bitoptions['bw_is_spammer'] ) {
+    \IPS\Output::i()->redirect( \IPS\Http\Url::internal( '' ) );
+}
+
 // setup storage and new server
 $storage = new \IPS\oauth2server\Storage( \IPS\Db::i() );
 $server = \IPS\oauth2server\Server::createServer($storage);
