@@ -1,7 +1,13 @@
 {
     "admin": {
         "oauthserver": {
-            "default_controller": "clients",
+            "default_controller": "",
+            "protected": false
+        }
+    },
+    "front": {
+        "redirect": {
+            "default_controller": "redirect",
             "protected": 0
         }
     }

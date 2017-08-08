@@ -1,1 +1,6 @@
-[]
+[
+    {
+        "key": "oauth2server_wrap_global_template",
+        "default": "1"
+    }
+]

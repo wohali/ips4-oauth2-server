@@ -1,12 +1,14 @@
 <?php
 
 $lang = array(
-	'__app_oauth2server'	=> "OAuth2 Server",
+    '__app_oauth2server' => "OAuth2 Server",
     'module__oauth2server_client' => "Applications (OAuth2 Clients)",
     'r__clients' => "Clients",
     'r__clients_manage' => "Can manage clients?",
     'menu__oauth2server_oauthserver' => "OAuth2 Server",
     'menu__oauth2server_oauthserver_clients' => "Applications",
+    'menu__oauth2server_oauthserver_settings' => "Settings",
+
     'add_client' => "Add Application",
     'client_name' => "Application Name",
     'client_name_desc' => "Name of the OAuth2 Application (Client)",
@@ -32,4 +34,8 @@ $lang = array(
     'authorize_title' => "Authorize external application",
     'authorize_yes' => "Yes",
     'authorize_no' => "No",
+
+    'oauth2server_settings' => "OAuth 2 Server Settings",
+    'oauth2server_wrap_global_template' => 'Wrap authorization page with global template?',
+    'oauth2server_wrap_global_template_desc' => "If enabled, the authorization page will be displayed inside of your website's global template. Disable if you are having problems with redirection or advertisements interrupting the OAuth 2 authorization flow."
 );

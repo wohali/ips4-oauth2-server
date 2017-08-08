@@ -5,6 +5,12 @@
             "controller": "clients",
             "do": "",
             "restriction": "clients_manage"
+        },
+        "settings": {
+            "tab": "community",
+            "controller": "settings",
+            "do": "",
+            "restriction": "settings_manage"
         }
     }
 }

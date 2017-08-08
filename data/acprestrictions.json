@@ -2,6 +2,9 @@
     "oauthserver": {
         "clients": {
             "clients_manage": "clients_manage"
+        },
+        "settings": {
+            "settings_manage": "settings_manage"
         }
     }
 }

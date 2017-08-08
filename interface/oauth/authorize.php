@@ -17,7 +17,10 @@ require_once str_replace( 'interface/oauth/authorize.php', 'sources/Server/Serve
 $member_id = \IPS\Member::loggedIn()->member_id;
 if ( ! $member_id ) {
     // ref parameter is base64 encoding of destination URL
-    $ref_url = \IPS\Settings::i()->base_url . "applications/oauth2server/interface/oauth/authorize.php?" . http_build_query($_GET, null, ini_get('arg_separator.output'), PHP_QUERY_RFC3986);
+    // Since 4.2.0, we have to "Inception" this because login-based redirect can only target an internal URL
+    $real_ref_url = \IPS\Settings::i()->base_url . "applications/oauth2server/interface/oauth/authorize.php?" . http_build_query($_GET, null, ini_get('arg_separator.output'), PHP_QUERY_RFC3986);
+    $real_ref = base64_encode( $real_ref_url );
+    $ref_url = \IPS\Http\Url::internal( 'app=oauth2server&module=redirect&controller=redirect&ref=' . $real_ref, 'front');
     $ref = base64_encode( $ref_url );
     \IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=core&module=system&controller=login&ref=' . $ref, 'front', 'login' ) );
 }
@@ -78,8 +81,13 @@ if ( empty($_POST) ) {
 
     // TODO: Surface scope in template output
     $form = \IPS\Theme::i()->getTemplate( 'server', 'oauth2server', 'front' )->authorize( $client, $scope );
-    $title = \IPS\Member::loggedIn()->language()->addToStack('authorize_title');
-    \IPS\Output::i()->sendOutput( \IPS\Theme::i()->getTemplate( 'global', 'core' )->globalTemplate( $title, $form, true, \IPS\ROOT_PATH ) , 200, 'text/html', \IPS\Output::i()->httpHeaders );
+    if ( \IPS\Settings::i()->oauth2server_wrap_global_template ) {
+        $title = \IPS\Member::loggedIn()->language()->addToStack('authorize_title');
+        \IPS\Output::i()->sendOutput( \IPS\Theme::i()->getTemplate( 'global', 'core' )->globalTemplate( $title, $form, true, \IPS\ROOT_PATH ) , 200, 'text/html', \IPS\Output::i()->httpHeaders );
+    } else {
+        $header = \IPS\Theme::i()->getTemplate( 'global', 'core', 'front' )->logo();
+        \IPS\Output::i()->sendOutput( $header . $form, 200, 'text/html', \IPS\Output::i()->httpHeaders );
+    }
 }
 
 // print the authorization code if the user has authorized your client
