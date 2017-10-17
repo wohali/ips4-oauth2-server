@@ -37,16 +37,4 @@ class _clients extends \IPS\Node\Controller
         chmod( \IPS\ROOT_PATH . '/applications/oauth2server/interface/oauth/token.php', 0755 );
         parent::execute();
     }
-
-    /**
-     * Modify root buttons
-     */
-    public function _getRootButtons()
-    {
-        $buttons = parent::_getRootButtons();
-        
-        /* Change form title */
-        $buttons['add']['title'] = 'add_client';
-        return $buttons;
-    }
 }

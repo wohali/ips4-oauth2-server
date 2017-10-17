@@ -9,7 +9,7 @@ $lang = array(
     'menu__oauth2server_oauthserver_clients' => "Applications",
     'menu__oauth2server_oauthserver_settings' => "Settings",
 
-    'add_client' => "Add Application",
+    'add' => "Add Application",
     'client_name' => "Application Name",
     'client_name_desc' => "Name of the OAuth2 Application (Client)",
     'redirect_uri' => "Redirect URI",
