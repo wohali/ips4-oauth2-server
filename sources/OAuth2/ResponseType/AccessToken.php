@@ -114,6 +114,12 @@ class AccessToken implements AccessTokenInterface
      */
     protected function generateAccessToken()
     {
+        if (function_exists('random_bytes')) {
+            $randomData = random_bytes(20);
+            if ($randomData !== false && strlen($randomData) === 20) {
+                return bin2hex($randomData);
+            }
+        }
         if (function_exists('mcrypt_create_iv')) {
             $randomData = mcrypt_create_iv(20, MCRYPT_DEV_URANDOM);
             if ($randomData !== false && strlen($randomData) === 20) {
@@ -181,7 +187,7 @@ class AccessToken implements AccessTokenInterface
 
         $revoked = $this->tokenStorage->unsetAccessToken($token);
 
-        // if a typehint is supplied and fails, try other storages 
+        // if a typehint is supplied and fails, try other storages
         // @see https://tools.ietf.org/html/rfc7009#section-2.1
         if (!$revoked && $tokenTypeHint != 'refresh_token') {
             if ($this->refreshStorage) {
